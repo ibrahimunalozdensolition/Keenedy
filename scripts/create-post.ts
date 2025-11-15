@@ -3,19 +3,14 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, addDoc, Timestamp } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  apiKey: "AIzaSyBEAC51bheW_WN78V20RvFFfj61Dvy8DaU",
+  authDomain: "kennedy-4135f.firebaseapp.com",
+  projectId: "kennedy-4135f",
+  storageBucket: "kennedy-4135f.firebasestorage.app",
+  messagingSenderId: "722910692732",
+  appId: "1:722910692732:web:60e4551c7f1013781310f9",
+  measurementId: "G-6LX1RH5JX2"
 };
-
-if (!firebaseConfig.apiKey || !firebaseConfig.projectId) {
-  console.error('HATA: Firebase yapılandırması eksik!');
-  console.error('Lütfen .env.local dosyasında NEXT_PUBLIC_FIREBASE_* değişkenlerini ayarlayın.');
-  process.exit(1);
-}
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -25,7 +20,7 @@ async function createPost() {
   
   const postData = {
     title: 'Mariechi Robotik Cihaz: Geleceğin Teknolojisi',
-    image: '/mariechi-device.png',
+    image: '/mariechi-robotik-cihaz.png',
     description: 'Mavi renkli, altıgen desenli yüzeyiyle dikkat çeken Mariechi robotik cihazı, sarust.tech tarafından geliştirilmiş yenilikçi bir teknoloji ürünü. Modern tasarımı ve gelişmiş özellikleriyle geleceğin robotik çözümlerine öncülük ediyor.',
     content: `Mariechi robotik cihazı, sarust.tech tarafından geliştirilmiş, geleceğin teknolojisini bugüne taşıyan bir üründür.
 
@@ -34,12 +29,15 @@ Cihazın en dikkat çekici özellikleri:
 **Tasarım ve Görünüm**
 - Mavi renkli, altıgen desenli yüzey yapısı
 - Modern ve estetik görünüm
-- Sarust.tech markası ile öne çıkan tasarım
+- Mariechi ve sarust.tech markaları ile öne çıkan tasarım
+- Hexagonal pattern ile teknolojik görünüm
 
 **Teknik Özellikler**
 - Gelişmiş sensör sistemleri
-- Hareket kabiliyeti için tekerlekli yapı
+- Hareket kabiliyeti için tekerlekli yapı (caster wheel ve ana tekerlek)
 - Işık yansımaları ve görsel geri bildirim sistemleri
+- Ventilasyon sistemleri ile soğutma
+- Sensör ve gösterge sistemleri
 
 **Kullanım Alanları**
 Bu robotik cihaz, çeşitli endüstriyel ve ticari uygulamalarda kullanılmak üzere tasarlanmıştır. Modern teknoloji ile geleneksel işlevselliği bir araya getiren Mariechi, geleceğin akıllı cihazlarına örnek teşkil etmektedir.
@@ -52,7 +50,7 @@ Daha fazla bilgi için sarust.tech'i ziyaret edebilirsiniz.`,
 
   try {
     console.log('Firebase\'e bağlanılıyor...');
-    console.log('Project ID:', firebaseConfig.projectId);
+    console.log('Project ID: kennedy-4135f');
     
     const docRef = await addDoc(collection(db, 'blogPosts'), postData);
     console.log('\n✅ Blog post başarıyla oluşturuldu!');

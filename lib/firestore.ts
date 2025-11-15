@@ -5,21 +5,46 @@ import { BlogPost, Ad } from '@/types';
 export async function getBlogPosts(maxPosts?: number): Promise<BlogPost[]> {
   try {
     const blogPostsRef = collection(db, 'blogPosts');
-    let q = query(blogPostsRef, orderBy('createdAt', 'desc'));
+    let q;
     
-    if (maxPosts) {
-      q = query(blogPostsRef, orderBy('createdAt', 'desc'), limit(maxPosts));
+    try {
+      q = query(blogPostsRef, orderBy('createdAt', 'desc'));
+      if (maxPosts) {
+        q = query(blogPostsRef, orderBy('createdAt', 'desc'), limit(maxPosts));
+      }
+    } catch (orderByError) {
+      q = query(blogPostsRef);
+      if (maxPosts) {
+        q = query(blogPostsRef, limit(maxPosts));
+      }
     }
     
     const querySnapshot = await getDocs(q);
     const posts: BlogPost[] = [];
     
     querySnapshot.forEach((doc) => {
+      const data = doc.data();
       posts.push({
         id: doc.id,
-        ...doc.data(),
+        ...data,
       } as BlogPost);
     });
+    
+    if (posts.length > 1 && posts[0].createdAt && posts[1].createdAt) {
+      posts.sort((a, b) => {
+        const dateA = a.createdAt instanceof Date 
+          ? a.createdAt.getTime() 
+          : (a.createdAt as { seconds: number }).seconds * 1000;
+        const dateB = b.createdAt instanceof Date 
+          ? b.createdAt.getTime() 
+          : (b.createdAt as { seconds: number }).seconds * 1000;
+        return dateB - dateA;
+      });
+      
+      if (maxPosts) {
+        return posts.slice(0, maxPosts);
+      }
+    }
     
     return posts;
   } catch (error) {
@@ -32,8 +57,12 @@ export async function getBlogPosts(maxPosts?: number): Promise<BlogPost[]> {
 
 export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
   try {
+    if (!slug || typeof slug !== 'string' || slug.trim() === '') {
+      return null;
+    }
+    
     const blogPostsRef = collection(db, 'blogPosts');
-    const q = query(blogPostsRef, where('slug', '==', slug));
+    const q = query(blogPostsRef, where('slug', '==', slug.trim()));
     const querySnapshot = await getDocs(q);
     
     if (querySnapshot.empty) {
@@ -55,6 +84,10 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
 
 export async function getAdsByPosition(position: Ad['position']): Promise<Ad[]> {
   try {
+    if (!position || typeof position !== 'string') {
+      return [];
+    }
+    
     const adsRef = collection(db, 'ads');
     const q = query(
       adsRef,
@@ -65,10 +98,13 @@ export async function getAdsByPosition(position: Ad['position']): Promise<Ad[]> 
     const ads: Ad[] = [];
     
     querySnapshot.forEach((doc) => {
-      ads.push({
-        id: doc.id,
-        ...doc.data(),
-      } as Ad);
+      const data = doc.data();
+      if (data.isActive === true) {
+        ads.push({
+          id: doc.id,
+          ...data,
+        } as Ad);
+      }
     });
     
     return ads;
@@ -88,10 +124,13 @@ export async function getAllActiveAds(): Promise<Ad[]> {
     const ads: Ad[] = [];
     
     querySnapshot.forEach((doc) => {
-      ads.push({
-        id: doc.id,
-        ...doc.data(),
-      } as Ad);
+      const data = doc.data();
+      if (data.isActive === true) {
+        ads.push({
+          id: doc.id,
+          ...data,
+        } as Ad);
+      }
     });
     
     return ads;
