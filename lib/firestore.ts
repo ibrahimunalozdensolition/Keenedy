@@ -23,7 +23,9 @@ export async function getBlogPosts(maxPosts?: number): Promise<BlogPost[]> {
     
     return posts;
   } catch (error) {
-    console.error('Error fetching blog posts:', error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error fetching blog posts:', error);
+    }
     return [];
   }
 }
@@ -44,7 +46,9 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
       ...doc.data(),
     } as BlogPost;
   } catch (error) {
-    console.error('Error fetching blog post:', error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error fetching blog post:', error);
+    }
     return null;
   }
 }
@@ -69,7 +73,9 @@ export async function getAdsByPosition(position: Ad['position']): Promise<Ad[]> 
     
     return ads;
   } catch (error) {
-    console.error('Error fetching ads:', error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error fetching ads:', error);
+    }
     return [];
   }
 }
@@ -90,7 +96,9 @@ export async function getAllActiveAds(): Promise<Ad[]> {
     
     return ads;
   } catch (error) {
-    console.error('Error fetching ads:', error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error fetching ads:', error);
+    }
     return [];
   }
 }
