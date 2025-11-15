@@ -6,7 +6,7 @@ export default function Header() {
       <div className="container mx-auto px-4 py-4">
         <nav className="flex items-center justify-between">
           <Link href="/" className="text-xl sm:text-2xl font-bold text-gray-800 hover:text-gray-600 transition-colors">
-            Blog Sitesi
+            Kennedy
           </Link>
           <div className="flex gap-4 sm:gap-6">
             <Link href="/" className="text-sm sm:text-base text-gray-700 hover:text-gray-900 transition-colors">
