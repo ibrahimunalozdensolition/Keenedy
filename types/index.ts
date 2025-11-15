@@ -6,10 +6,16 @@ export interface BlogPost {
   content: string;
   redirectUrl: string;
   slug: string;
+  tags?: string[];
   createdAt: {
     seconds: number;
     nanoseconds: number;
   } | Date;
+}
+
+export interface TagCount {
+  tag: string;
+  count: number;
 }
 
 export interface Ad {

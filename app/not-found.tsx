@@ -2,17 +2,37 @@ import Link from 'next/link';
 
 export default function NotFound() {
   return (
-    <div className="bg-gray-50 min-h-screen flex items-center justify-center">
-      <div className="text-center">
-        <h1 className="text-6xl font-bold text-gray-800 mb-4">404</h1>
-        <h2 className="text-2xl font-semibold text-gray-600 mb-4">Sayfa Bulunamadı</h2>
-        <p className="text-gray-500 mb-8">Aradığınız sayfa mevcut değil.</p>
-        <Link
-          href="/"
-          className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
-        >
-          Ana Sayfaya Dön
-        </Link>
+    <div className="bg-gradient-to-br from-gray-50 via-white to-gray-50 min-h-screen flex items-center justify-center px-4">
+      <div className="text-center max-w-2xl">
+        <div className="mb-8">
+          <h1 className="text-8xl sm:text-9xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
+            404
+          </h1>
+        </div>
+        <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Sayfa Bulunamadı</h2>
+        <p className="text-lg text-gray-600 mb-10 max-w-md mx-auto">
+          Aradığınız sayfa mevcut değil veya taşınmış olabilir.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+          >
+            Ana Sayfaya Dön
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+          </Link>
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-2 text-gray-700 hover:text-blue-600 font-semibold transition-colors duration-200"
+          >
+            Blog'a Git
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </div>
       </div>
     </div>
   );

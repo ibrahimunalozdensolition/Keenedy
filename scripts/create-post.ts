@@ -44,7 +44,8 @@ Bu robotik cihaz, çeşitli endüstriyel ve ticari uygulamalarda kullanılmak ü
 
 Daha fazla bilgi için sarust.tech'i ziyaret edebilirsiniz.`,
     redirectUrl: 'https://sarust.tech',
-    slug: slug,
+    slug: slug.toLowerCase(),
+    tags: ['robotik', 'teknoloji', 'mariechi', 'sarust.tech', 'cihaz', 'kennedy'].map(tag => tag.toLowerCase()),
     createdAt: Timestamp.now(),
   };
 

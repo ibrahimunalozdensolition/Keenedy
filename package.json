@@ -7,14 +7,22 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "create-post": "tsx scripts/create-post.ts"
+    "create-post": "tsx scripts/create-post.ts",
+    "create-admin": "tsx scripts/create-admin.ts",
+    "create-admin-manual": "tsx scripts/create-admin-manual.ts",
+    "deploy": "firebase deploy",
+    "deploy:hosting": "firebase deploy --only hosting",
+    "deploy:firestore": "firebase deploy --only firestore",
+    "deploy:rules": "firebase deploy --only firestore:rules",
+    "deploy:indexes": "firebase deploy --only firestore:indexes"
   },
   "dependencies": {
     "firebase": "^12.6.0",
     "firebase-admin": "^13.6.0",
     "next": "16.0.3",
     "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react-dom": "19.2.0",
+    "react-firebase-hooks": "^5.1.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
