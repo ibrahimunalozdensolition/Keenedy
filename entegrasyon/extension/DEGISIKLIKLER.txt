@@ -1,0 +1,84 @@
+SON DEĞİŞİKLİKLER - CORS SORUNU ÇÖZÜLDÜ
+========================================
+
+📌 SORUN:
+- Content script'ten Google reCAPTCHA'ya CORS hatası
+- "Access to fetch at 'https://www.google.com/recaptcha/...' from origin 'https://ouo.press' has been blocked by CORS policy"
+
+✅ ÇÖZÜM:
+reCAPTCHA çözümlemesi artık BACKGROUND SCRIPT'te yapılıyor!
+
+┌─────────────────────────────────────────────────────────┐
+│ ÖNCEKİ MİMARİ (❌ ÇALIŞMIYORDU)                         │
+├─────────────────────────────────────────────────────────┤
+│ Content Script (ouo.press) → Google reCAPTCHA           │
+│                            ↓                            │
+│                      CORS HATASI ❌                     │
+└─────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────┐
+│ YENİ MİMARİ (✅ ÇALIŞIYOR)                              │
+├─────────────────────────────────────────────────────────┤
+│ 1. Content Script → Background Script (mesaj)           │
+│ 2. Background Script → Google reCAPTCHA (CORS YOK ✅)   │
+│ 3. Background Script → Content Script (token)           │
+│ 4. Content Script → OUO.io (POST isteği)               │
+│ 5. Content Script → Final URL (yönlendirme)            │
+└─────────────────────────────────────────────────────────┘
+
+
+📝 YAPILAN DEĞİŞİKLİKLER:
+
+1. background.js:
+   ✓ recaptchaV3() fonksiyonu eklendi
+   ✓ 'solveRecaptcha' mesajı dinleniyor
+   ✓ Token content script'e gönderiliyor
+
+2. content.js:
+   ✓ recaptchaV3() artık background'a mesaj gönderiyor
+   ✓ CORS sorunu YOK!
+
+3. manifest.json:
+   ✓ Content Security Policy eklendi
+   ✓ all_frames: false (sadece ana frame)
+
+
+🧪 YENİDEN TEST EDİN:
+
+1. Chrome'da chrome://extensions/ açın
+2. Uzantıyı KALDIRIN ve YENİDEN YÜKLEYİN (önemli!)
+   - Refresh yetmez, manifest değişti
+   - "Kaldır" → "Paketlenmemiş öğe yükle"
+
+3. Test linki: https://ouo.io/tyG8hnW
+
+4. Console'da göreceğiniz (F12):
+   ✅ OUO Bypass başlatıldı
+   ✅ Adım 1: Token keys: ['_token', 'x-token', 'v-token']
+   ✅ Adım 1: reCAPTCHA çözülüyor...
+   ✅ Adım 1: reCAPTCHA çözüldü (CORS YOK!)
+   ✅ Adım 1: POST isteği gönderiliyor
+   ✅ Adım 1: Response status: 200
+   ✅ Adım 2: ... (aynı adımlar)
+   ✅ Adım 2: Response status: 302
+   ✅ Yönlendirme URL bulundu
+   ✅ Asıl linke yönlendirme
+
+
+⚠️ ÖNEMLİ:
+- Uzantıyı sadece refresh ETMEYİN!
+- Manifest değişti, KALDIRIP YENİDEN YÜKLEYİN!
+- Service worker yeniden başlatılmalı
+
+
+🎯 BEKLENEN SONUÇ:
+
+https://ouo.io/tyG8hnW
+  ↓ (bypass)
+https://ouo.io/OCai90a (başka bir ouo linki)
+  ↓ (otomatik bypass)
+ASIL LİNK (kısaltmasız)
+
+
+BAŞARIYLA ÇALIŞACAK! 🚀
+

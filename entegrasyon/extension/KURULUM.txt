@@ -1,0 +1,60 @@
+OUO BYPASS CHROME UZANTISI - KURULUM TALİMATLARI
+================================================
+
+KURULUM ADIMLARI:
+
+1. Chrome tarayıcınızı açın
+
+2. Adres çubuğuna şunu yazın: chrome://extensions/
+
+3. Sağ üst köşede "Geliştirici modu" (Developer mode) seçeneğini aktif edin
+
+4. "Paketlenmemiş öğe yükle" (Load unpacked) butonuna tıklayın
+
+5. Bu "extension" klasörünü seçin
+
+6. Uzantı başarıyla yüklenecek!
+
+
+KULLANIM:
+
+- Otomatik Mod: 
+  Herhangi bir ouo.io veya ouo.press linkine gittiğinizde uzantı otomatik olarak bypass edip 
+  asıl linke yönlendirecek
+
+- Manuel Mod:
+  Uzantı ikonuna tıklayarak manuel olarak da link bypass edebilirsiniz
+
+
+ÖZELLİKLER:
+
+✓ Otomatik bypass
+✓ Manuel bypass seçeneği
+✓ Tekrar kısaltılmış linkleri otomatik çözer
+✓ Bypass geçmişi
+✓ Modern ve kullanıcı dostu arayüz
+
+
+NOT:
+
+Uzantı, ouo.io ve ouo.press linklerini bypass etmek için Google reCAPTCHA v3 çözümlemesi yapar.
+Bazı durumlarda işlem birkaç saniye sürebilir.
+
+Bypass işlemi content script tarafından ouo.io sayfası içinden yapılır, böylece CORS problemi yaşanmaz.
+Sayfa yüklendiğinde otomatik olarak bypass işlemi başlar.
+
+
+DOSYA YAPISI:
+
+extension/
+  ├── manifest.json       (Uzantı yapılandırması)
+  ├── background.js       (Arka plan işlemleri)
+  ├── content.js          (Sayfa içi script)
+  ├── popup.html          (Popup arayüzü)
+  ├── popup.js            (Popup mantığı)
+  ├── popup.css           (Popup stilleri)
+  └── icons/              (Uzantı ikonları)
+      ├── icon16.png
+      ├── icon48.png
+      └── icon128.png
+

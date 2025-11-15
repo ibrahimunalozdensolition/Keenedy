@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OUO Bypass</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Link Bypass Tool</h1>
+      <p class="subtitle">ouo.io, ouo.press ve ay.link linklerini bypass eder</p>
+    </div>
+
+    <div class="manual-section">
+      <h3>Manuel Bypass</h3>
+      <div class="input-group">
+        <input type="text" id="urlInput" placeholder="ouo.io, ouo.press veya ay.link linki girin..." />
+        <button id="bypassBtn">Bypass</button>
+      </div>
+      <div id="result" class="result hidden"></div>
+    </div>
+
+    <div class="stats-section">
+      <h3>Son Bypass</h3>
+      <div id="lastBypass" class="stats-content">
+        <p class="no-data">Henüz bypass işlemi yapılmadı</p>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <h3>Kullanım</h3>
+      <ul>
+        <li>Desteklenen linklere (ouo.io, ouo.press, ay.link) gittiğinizde otomatik bypass edilir</li>
+        <li>Manuel bypass için yukarıdaki alana link girip "Bypass" butonuna tıklayın</li>
+        <li>Tekrar kısaltılmış linkler otomatik olarak çözülür</li>
+      </ul>
+    </div>
+
+    <div class="footer">
+      <p>v1.1.0</p>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
+

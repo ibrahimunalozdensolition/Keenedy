@@ -1,0 +1,95 @@
+EKRANDA GÖSTERILEN HATA MESAJLARI
+===================================
+
+✅ Artık tüm hatalar ekranda popup olarak gösteriliyor!
+
+📋 HATA TÜRLERİ VE MESAJLAR:
+
+1. ⏱️ CLOUDFLARE KONTROLÜ
+   Başlık: "Cloudflare Kontrolü"
+   Mesaj: "Cloudflare bot kontrolü bekleniyor... Bu birkaç saniye sürebilir."
+   Süre: Cloudflare geçene kadar
+   
+2. ❌ FORM BULUNAMADI
+   Başlık: "Form Bulunamadı"
+   Mesaj: "Sayfa yapısı değişmiş olabilir. Lütfen sayfayı yenileyin."
+   Süre: 5 saniye sonra kapanır
+   Görünüm: Kırmızı X işareti
+   
+3. ❌ TOKEN BULUNAMADI
+   Başlık: "Token Bulunamadı"
+   Mesaj: "Sayfa yapısı değişmiş olabilir. Lütfen sayfayı yenileyin."
+   Süre: 5 saniye sonra kapanır
+   Görünüm: Kırmızı X işareti
+   
+4. ❌ RECAPTCHA HATASI
+   Başlık: "reCAPTCHA Hatası"
+   Mesaj: "Hata: [hata detayı]. İnternet bağlantınızı kontrol edin."
+   Süre: 5 saniye sonra kapanır
+   Görünüm: Kırmızı X işareti
+   
+5. ❌ BYPASS BAŞARISIZ
+   Başlık: "Bypass Başarısız"
+   Mesaj: "Yönlendirme URL'si bulunamadı. Sayfa yenilenebilir veya başka bir link deneyin."
+   Süre: 7 saniye sonra kapanır
+   Görünüm: Kırmızı X işareti
+   
+6. ❌ BEKLENMEYEN HATA
+   Başlık: "Beklenmeyen Hata"
+   Mesaj: "Hata: [hata detayı]. Lütfen sayfayı yenileyin veya tekrar deneyin."
+   Süre: 7 saniye sonra kapanır
+   Görünüm: Kırmızı X işareti
+   
+7. ⏱️ ZAMAN AŞIMI
+   Başlık: "Zaman Aşımı"
+   Mesaj: "Form 10 saniye içinde bulunamadı. Sayfa manuel olarak yüklenebilir."
+   Süre: 5 saniye sonra kapanır
+   Görünüm: Kırmızı X işareti
+
+
+🎨 POPUP TASARIMI:
+
+BAŞARILI DURUM (Loading):
+┌─────────────────────────────┐
+│       [Mavi Spinner]        │
+│                             │
+│   Link Bypass Ediliyor      │
+│                             │
+│  Form bulundu, bypass       │
+│  işlemi başlatılıyor...     │
+└─────────────────────────────┘
+
+HATA DURUMU:
+┌─────────────────────────────┐
+│     [Kırmızı X İkonu]       │
+│                             │
+│     reCAPTCHA Hatası        │
+│      (kırmızı yazı)         │
+│                             │
+│  Hata detayı burada...      │
+│  İnternet bağlantınızı      │
+│  kontrol edin.              │
+└─────────────────────────────┘
+
+
+💡 ÖZELLİKLER:
+
+✓ Tüm hatalar console + ekranda gösteriliyor
+✓ Hata durumunda spinner kaybolur, kırmızı X görünür
+✓ Hata mesajı kırmızı renkte
+✓ Otomatik kapanma (5-7 saniye)
+✓ Modern tasarım (box-shadow, border-radius)
+✓ Responsive ve kullanıcı dostu
+
+
+📱 KULLANICI DENEYİMİ:
+
+1. Sayfa açılır → "Cloudflare Kontrolü" popup'ı
+2. Cloudflare geçer → "Link Bypass Ediliyor" popup'ı
+3. İşlem başarılı → Asıl linke yönlenir
+4. HATA olursa → Kırmızı X ile hata mesajı
+5. 5-7 saniye sonra popup otomatik kapanır
+
+
+Artık kullanıcı console'a bakmadan tüm durumları görebilir! 🎉
+

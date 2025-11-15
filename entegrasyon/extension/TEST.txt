@@ -1,0 +1,104 @@
+OUO BYPASS CHROME UZANTISI - TEST REHBERİ
+==========================================
+
+📋 KURULUM
+
+1. Chrome'da chrome://extensions/ açın
+2. Sağ üstte "Geliştirici modu" (Developer mode) açın
+3. "Paketlenmemiş öğe yükle" (Load unpacked) tıklayın
+4. Bu "extension" klasörünü seçin
+5. ✅ Uzantı yüklendi!
+
+
+🧪 TEST ADIMLARI
+
+Test Linki: https://ouo.io/tyG8hnW
+
+1. Test linkine gidin
+2. Şunları göreceksiniz:
+   - Önce "Cloudflare kontrolü bekleniyor..." (2-3 saniye)
+   - Sonra "Link bypass ediliyor..." (3-5 saniye)
+   - Otomatik yönlendirme
+
+3. Console'u açın (F12) ve log'ları izleyin:
+   - "OUO Bypass başlatıldı"
+   - "Adım 1: Token keys: [...]"
+   - "Adım 1: reCAPTCHA çözülüyor..."
+   - "Adım 1: reCAPTCHA çözüldü"
+   - "Adım 1: POST isteği gönderiliyor"
+   - "Adım 1: Response status: 200"
+   - Adım 2 aynı şekilde...
+   - "Yönlendirme URL bulundu: ..."
+
+
+🔍 SORUN GİDERME
+
+SORUN: "Form bulunamadı" hatası
+ÇÖZÜM: Sayfa Cloudflare challenge'ı geçememiş olabilir. 
+       Sayfayı yenileyin veya manuel challenge'ı çözün.
+
+SORUN: "reCAPTCHA hatası"
+ÇÖZÜM: Google reCAPTCHA servisi ulaşılamıyor olabilir.
+       İnternet bağlantınızı kontrol edin.
+
+SORUN: "Response status: 403"
+ÇÖZÜM: Cloudflare bot algılaması. Sayfayı manuel yükleyin,
+       uzantı Cloudflare geçtikten sonra otomatik çalışacak.
+
+SORUN: Tekrar kısaltılmış link (nested ouo links)
+ÇÖZÜM: Normal! Uzantı otomatik tekrar bypass eder.
+       Örnek: ouo.io/link1 → ouo.io/link2 → asıl link
+
+
+💡 İPUÇLARI
+
+✓ Cloudflare challenge otomatik geçer (2-3 saniye)
+✓ Her adım console'da loglanır
+✓ Hata olursa overlay'de gösterilir
+✓ Tekrar kısaltılmış linkler otomatik çözülür
+✓ Son bypass edilen link popup'ta görünür
+
+
+🎯 BEKLENEN DAVRANIŞLAR
+
+1. OTOMATIK MOD:
+   - ouo.io/ouo.press linkine gittiğinizde
+   - Overlay gösterilir
+   - Cloudflare bekler
+   - Otomatik bypass edilir
+   - Asıl linke yönlenir
+
+2. MANUEL MOD:
+   - Uzantı ikonuna tıklayın
+   - Link girin
+   - "Bypass" butonuna tıklayın
+   - Yeni tab açılır ve otomatik bypass edilir
+
+3. NESTED LINKS:
+   - İlk bypass → başka bir ouo linki
+   - İkinci bypass → başka bir ouo linki veya asıl link
+   - Maksimum 5 yönlendirme desteklenir
+
+
+📊 TEST SONUCU
+
+https://ouo.io/tyG8hnW için beklenen sonuç:
+1. İlk bypass → https://ouo.io/OCai90a (başka bir ouo linki)
+2. İkinci bypass → Asıl link
+
+Console'da görecekleriniz:
+✓ Adım 1: Token keys: ['_token', 'x-token', 'v-token']
+✓ Adım 1: Response status: 200
+✓ Adım 2: Token keys: ['_token', 'x-token']
+✓ Adım 2: Response status: 302
+✓ Yönlendirme URL bulundu
+✓ Tekrar kısaltılmış link tespit edildi (eğer varsa)
+
+
+🚀 BAŞARIYLA TEST EDİLDİ!
+
+Herhangi bir sorun olursa:
+1. Console log'larını kontrol edin (F12)
+2. Uzantıyı yenileyin (chrome://extensions/)
+3. Sayfayı temiz yükleyin (Ctrl+Shift+R)
+

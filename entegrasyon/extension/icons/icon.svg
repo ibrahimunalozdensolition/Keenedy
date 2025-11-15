@@ -1,0 +1,30 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <rect width="128" height="128" rx="24" fill="url(#grad)"/>
+  
+  <path d="M 40 64 L 55 64" stroke="white" stroke-width="6" stroke-linecap="round"/>
+  <path d="M 73 64 L 88 64" stroke="white" stroke-width="6" stroke-linecap="round"/>
+  
+  <circle cx="64" cy="64" r="8" fill="white"/>
+  
+  <path d="M 48 44 L 58 54" stroke="white" stroke-width="6" stroke-linecap="round"/>
+  <path d="M 70 74 L 80 84" stroke="white" stroke-width="6" stroke-linecap="round"/>
+  
+  <path d="M 48 84 L 58 74" stroke="white" stroke-width="6" stroke-linecap="round"/>
+  <path d="M 70 54 L 80 44" stroke="white" stroke-width="6" stroke-linecap="round"/>
+  
+  <path d="M 30 50 Q 30 30 50 30" stroke="white" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M 78 98 Q 98 98 98 78" stroke="white" stroke-width="5" fill="none" stroke-linecap="round"/>
+  
+  <circle cx="50" cy="30" r="4" fill="white"/>
+  <circle cx="30" cy="50" r="4" fill="white"/>
+  <circle cx="78" cy="98" r="4" fill="white"/>
+  <circle cx="98" cy="78" r="4" fill="white"/>
+</svg>
+
