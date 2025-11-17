@@ -19,14 +19,14 @@ export default function TagsSidebar({ tags }: TagsSidebarProps) {
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
+    <div className="bg-gray-800 rounded-xl shadow-lg border border-gray-700 overflow-hidden">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-gray-50 transition-colors border-b border-gray-200"
+        className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-gray-700 transition-colors border-b border-gray-700"
       >
-        <h2 className="text-xl font-bold text-gray-900">Kategoriler</h2>
+        <h2 className="text-xl font-bold text-gray-100">Kategoriler</h2>
         <svg
-          className={`w-5 h-5 text-gray-600 transition-transform duration-200 ${
+          className={`w-5 h-5 text-gray-400 transition-transform duration-200 ${
             isOpen ? 'transform rotate-180' : ''
           }`}
           fill="none"
@@ -48,15 +48,15 @@ export default function TagsSidebar({ tags }: TagsSidebarProps) {
                   href={`/blog?tag=${encodeURIComponent(tagCount.tag)}`}
                   className={`flex items-center justify-between px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
                     isSelected
-                      ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-md'
-                      : 'bg-gray-50 hover:bg-gray-100 text-gray-700'
+                      ? 'bg-blue-600 text-white hover:bg-blue-500 shadow-md'
+                      : 'bg-gray-700 hover:bg-gray-600 text-gray-300'
                   }`}
                 >
                   <span>{tagCount.tag}</span>
                   <span className={`text-xs px-2 py-1 rounded-full font-semibold ${
                     isSelected
-                      ? 'bg-blue-700 text-white'
-                      : 'bg-white text-gray-600'
+                      ? 'bg-blue-500 text-white'
+                      : 'bg-gray-600 text-gray-300'
                   }`}>
                     {tagCount.count}
                   </span>

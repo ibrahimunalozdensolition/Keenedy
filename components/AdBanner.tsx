@@ -17,18 +17,19 @@ export default function AdBanner({ ad, className = '' }: AdBannerProps) {
       rel="noopener noreferrer"
       className={`block ${className}`}
     >
-      <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+      <div className="bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 border border-gray-700">
         <div className="relative w-full h-32">
           <Image
             src={ad.image || '/placeholder.jpg'}
             alt={ad.title}
             fill
             className="object-cover"
+            unoptimized
           />
         </div>
         {ad.title && (
           <div className="p-3">
-            <p className="text-sm font-medium text-gray-700 text-center">
+            <p className="text-sm font-medium text-gray-300 text-center">
               {ad.title}
             </p>
           </div>

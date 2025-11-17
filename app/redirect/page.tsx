@@ -16,18 +16,18 @@ function RedirectContent() {
 
   if (!url) {
     return (
-      <div className="bg-gradient-to-br from-gray-50 via-white to-gray-50 min-h-screen flex items-center justify-center px-4">
-        <div className="bg-white rounded-2xl shadow-xl p-8 sm:p-10 text-center max-w-md border border-gray-100">
-          <div className="inline-block p-4 bg-red-100 rounded-full mb-6">
-            <svg className="w-12 h-12 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 min-h-screen flex items-center justify-center px-4">
+        <div className="bg-gray-800 rounded-2xl shadow-xl p-8 sm:p-10 text-center max-w-md border border-gray-700">
+          <div className="inline-block p-4 bg-red-900/30 rounded-full mb-6">
+            <svg className="w-12 h-12 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Geçersiz Link</h1>
-          <p className="text-gray-600 mb-8">Yönlendirme linki bulunamadı.</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-100 mb-4">Geçersiz Link</h1>
+          <p className="text-gray-400 mb-8">Yönlendirme linki bulunamadı.</p>
           <Link
             href="/"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-400 hover:to-purple-400 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
           >
             Ana Sayfaya Dön
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

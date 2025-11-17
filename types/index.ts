@@ -2,6 +2,7 @@ export interface BlogPost {
   id: string;
   title: string;
   image: string;
+  images?: string[];
   description: string;
   content: string;
   redirectUrl: string;

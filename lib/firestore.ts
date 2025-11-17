@@ -1,4 +1,4 @@
-import { collection, getDocs, query, where, orderBy, limit, doc, getDoc } from 'firebase/firestore';
+import { collection, getDocs, query, where, orderBy, limit, doc, getDoc, Timestamp } from 'firebase/firestore';
 import { db } from './firebase';
 import { BlogPost, Ad, TagCount } from '@/types';
 
@@ -64,6 +64,16 @@ export async function getBlogPosts(maxPosts?: number, tag?: string): Promise<Blo
         ...data,
       } as BlogPost;
       
+      if (post.createdAt) {
+        if (post.createdAt instanceof Timestamp) {
+          post.createdAt = post.createdAt.toDate() as Date;
+        } else if (typeof (post.createdAt as any).toDate === 'function') {
+          post.createdAt = (post.createdAt as any).toDate() as Date;
+        } else if (typeof (post.createdAt as any).seconds === 'number') {
+          post.createdAt = new Date((post.createdAt as any).seconds * 1000) as Date;
+        }
+      }
+      
       if (!post.slug && post.title) {
         post.slug = generateSlug(post.title);
       }
@@ -128,11 +138,23 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
         if (postSlug === normalizedSlug || 
             postSlug === slug.trim() || 
             generatedSlug === normalizedSlug) {
-          foundPost = {
+          const post = {
             id: doc.id,
             ...data,
             slug: postSlug || generatedSlug || doc.id,
           } as BlogPost;
+          
+          if (post.createdAt) {
+            if (post.createdAt instanceof Timestamp) {
+              post.createdAt = post.createdAt.toDate() as Date;
+            } else if (typeof (post.createdAt as any).toDate === 'function') {
+              post.createdAt = (post.createdAt as any).toDate() as Date;
+            } else if (typeof (post.createdAt as any).seconds === 'number') {
+              post.createdAt = new Date((post.createdAt as any).seconds * 1000) as Date;
+            }
+          }
+          
+          foundPost = post;
         }
       });
       return foundPost;
@@ -145,6 +167,17 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
       ...postData,
       slug: postData.slug || (postData.title ? generateSlug(postData.title) : doc.id),
     } as BlogPost;
+    
+    if (post.createdAt) {
+      if (post.createdAt instanceof Timestamp) {
+        post.createdAt = post.createdAt.toDate() as Date;
+      } else if (typeof (post.createdAt as any).toDate === 'function') {
+        post.createdAt = (post.createdAt as any).toDate() as Date;
+      } else if (typeof (post.createdAt as any).seconds === 'number') {
+        post.createdAt = new Date((post.createdAt as any).seconds * 1000) as Date;
+      }
+    }
+    
     return post;
   } catch (error) {
     console.error('Error fetching blog post:', error);
@@ -208,6 +241,65 @@ export async function getAllActiveAds(): Promise<Ad[]> {
     if (process.env.NODE_ENV === 'development') {
       console.error('Error fetching ads:', error);
     }
+    return [];
+  }
+}
+
+export async function searchBlogPosts(searchQuery: string): Promise<BlogPost[]> {
+  try {
+    if (!searchQuery || typeof searchQuery !== 'string' || searchQuery.trim() === '') {
+      return [];
+    }
+    
+    const normalizedQuery = searchQuery.trim().toLowerCase();
+    const blogPostsRef = collection(db, 'blogPosts');
+    const querySnapshot = await getDocs(blogPostsRef);
+    const posts: BlogPost[] = [];
+    
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      const post = {
+        id: doc.id,
+        ...data,
+      } as BlogPost;
+      
+      if (post.createdAt) {
+        if (post.createdAt instanceof Timestamp) {
+          post.createdAt = post.createdAt.toDate() as Date;
+        } else if (typeof (post.createdAt as any).toDate === 'function') {
+          post.createdAt = (post.createdAt as any).toDate() as Date;
+        } else if (typeof (post.createdAt as any).seconds === 'number') {
+          post.createdAt = new Date((post.createdAt as any).seconds * 1000) as Date;
+        }
+      }
+      
+      if (!post.slug && post.title) {
+        post.slug = generateSlug(post.title);
+      }
+      
+      const titleMatch = post.title?.toLowerCase().includes(normalizedQuery);
+      const descriptionMatch = post.description?.toLowerCase().includes(normalizedQuery);
+      const contentMatch = post.content?.toLowerCase().includes(normalizedQuery);
+      
+      if (titleMatch || descriptionMatch || contentMatch) {
+        posts.push(post);
+      }
+    });
+    
+    posts.sort((a, b) => {
+      if (!a.createdAt || !b.createdAt) return 0;
+      const dateA = a.createdAt instanceof Date 
+        ? a.createdAt.getTime() 
+        : (a.createdAt as { seconds: number }).seconds * 1000;
+      const dateB = b.createdAt instanceof Date 
+        ? b.createdAt.getTime() 
+        : (b.createdAt as { seconds: number }).seconds * 1000;
+      return dateB - dateA;
+    });
+    
+    return posts;
+  } catch (error) {
+    console.error('Error searching blog posts:', error);
     return [];
   }
 }
