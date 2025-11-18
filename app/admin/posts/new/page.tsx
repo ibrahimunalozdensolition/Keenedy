@@ -303,19 +303,6 @@ export default function NewPost() {
                   )}
                 </div>
 
-                <div>
-                  <label className="block text-xs text-gray-400 mb-2">
-                    Tek Fotoğraf URL (Eski Yöntem)
-                  </label>
-                  <input
-                    type="url"
-                    value={formData.image}
-                    onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                    className="w-full px-4 py-2 bg-gray-700 border border-gray-600 text-gray-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none placeholder-gray-500"
-                    placeholder="https://example.com/image.jpg"
-                  />
-                </div>
-
                 {(images.length > 0 || imagePreviews.length > 0) && (
                   <div className="mt-4">
                     <p className="text-xs text-gray-400 mb-2">Yüklenen Fotoğraflar ({images.length}):</p>
